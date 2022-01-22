@@ -5,14 +5,22 @@ import { CommandInteraction } from 'discord.js';
 @ApplyOptions<SlashCommandOptions>({
   guildOnly: true,
   commandData: {
-    name: 'example',
-    description: 'Says "Hey!"'
+    name: 'play',
+    description: 'Play a song',
+    options: [
+      {
+        name: 'query',
+        type: 'STRING',
+        description: 'The song to queue',
+        required: true
+      }
+    ]
   }
 })
-export default class ExampleSlashCommand extends SlashCommand {
+export default class PlaySlashCommand extends SlashCommand {
   async run(interaction: CommandInteraction) {
     interaction.reply({
-      content: 'Hey!',
+      content: `You searched for ${interaction.options.getString('query')}`,
       ephemeral: true
     });
   }
